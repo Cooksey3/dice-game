@@ -43,7 +43,16 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 
 	document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
-	nextPlayer();
+	if(scores[activePlayer] >= 20) {
+		alert('Player ' + (activePlayer + 1) + ' wins!!!!')
+		document.getElementById('name-' + activePlayer).textContent = 'Winner!!!';
+		document.querySelector('.dice').style.display = 'none';
+		document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+		document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+	} else {
+		nextPlayer();	
+	}
+
 })
 
 function nextPlayer() {
@@ -58,8 +67,6 @@ function nextPlayer() {
 
 	document.querySelector('.dice').style.display = 'none';
 }
-
-
 
 
 
