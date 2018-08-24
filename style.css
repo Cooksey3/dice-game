@@ -143,12 +143,56 @@ i {
 
 .dice {
     position: absolute;
-    left: 50%;
     top: 178px;
     transform: translateX(-50%);
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
 
+#dice1 {
+    left: 43%;
+}
+
+#dice2 {
+    left: 57%;
+}
+
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+
+/*
+        var dot, pink, razorback, trotter, snouter, leaningJowler;
+        dot = false;
+        pink = false;
+        razorback = false;
+        trotter = false;
+        snouter = false;
+        leaningJowler = false;
+
+
+        //These return numbers. Which means that we probably need an array.
+        var rollScore = 0;
+        var dieArray = [dot, pink, razorback, trotter, snouter, leaningJowler];
+
+        // //potential roll
+        // var d1, d2, p1, p2, r1, r2, t1, t2, s1, s2, l1, l2
+
+        var die1 = {
+            dot: false,
+            pink: false,
+            razorback: false,
+            trotter: false,
+            snouter: false,
+            leaningJowler: false
+        }
+
+        var die2 = {
+            dot: false,
+            pink: false,
+            razorback: false,
+            trotter: false,
+            snouter: false,
+            leaningJowler: false
+        }
+*/

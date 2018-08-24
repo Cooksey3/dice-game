@@ -9,6 +9,23 @@ GAME RULES:
 
 */
 
+		function pigOut() {
+			alert('Pig out!');
+			nextPlayer();
+		}
+
+		function doubleTrotter() {
+			roundScore += 20;
+		}
+
+		function doubleRazorback() {
+			roundScore += 20;
+		}
+
+		function doubleSnouter() {
+			roundScore += 40;
+		}
+
 		function doubleLeaningJowler() {
 			alert('YOU GOT A DOUBLE LEANING JOWLER!!!');
 			roundScore += 60;
@@ -82,99 +99,84 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 		die1[dieArray[dice1-1]] = true;
 		die2[dieArray[dice2-1]] = true;
 
+		console.log(dice1, dieArray[dice1-1]);
+		console.log(dice2, dieArray[dice2-1]);
+
 		if((die1['.dot'] && die2['.pink']) || (die2['.dot'] && die1['.pink'])) {
-			(function pigOut() {
-				alert('Pig out!');
-				nextPlayer();
-			})();
+			pigOut();
 		} else if (dice1 === dice2) {
 			if (die1['.dot'] || die1['.pink']) {
 				roundScore++;
 			} else if(die1['.razorback']) {
-				(function doubleRazorBack() {
-					roundScore += 20;
-				})();
+				doubleRazorback();
 			} else if(die1['.trotter']) {
-				(function doubleTrotter() {
-					roundScore += 20;
-				})();
+				doubleTrotter();
 			} else if(die1['.snouter']) {
-				(function doubleSnouter() {
-					roundScore += 40;
-				})();
+				doubleSnouter();
 			} if(die1['.leaningJowler']) {
-				(function doubleLeaningJowler() {
-					alert('YOU GOT A DOUBLE LEANING JOWLER!!!');
-					roundScore += 60;
-				})();
+				doubleLeaningJowler();
 			}
 		} else {
-			addDie(dice1);
-			addDie(dice2);
+			addDie(dice1, dice2);
+			// addDie(dice2);
 		}
 
-		function addDie(die) {
-			if (die === 1 || die === 2) {
+		function addDie(die1, die2) {
+			console.log('We are here now');
+			if (die1 === 1 || die1 === 2) {
 			    roundScore += 0;
+			    console.log(roundScore);
 			}
-			if (die === 3 || die === 4) {
+			if (die1 === 3 || die1 === 4) {
 				roundScore += 5;
+				console.log(roundScore)
 			}
-			if (die === 5) {
+			if (die1 === 5) {
 				roundScore += 10;
+				console.log(roundScore)
 			}
-			if (die === 6) {
+			if (die1 === 6) {
 				roundScore += 15;
+				console.log(roundScore)
+			}
+			if (die2 === 1 || die2 === 2) {
+			    roundScore += 0;
+			    console.log(roundScore);
+			}
+			if (die2 === 3 || die2 === 4) {
+				roundScore += 5;
+				console.log(roundScore)
+			}
+			if (die2 === 5) {
+				roundScore += 10;
+				console.log(roundScore)
+			}
+			if (die2 === 6) {
+				roundScore += 15;
+				console.log(roundScore)
 			}
 		}
 
-		//Dice 1 calculator. Maybe extract this into a function that takes a die parameter, and then calculates the value
+	// 	//Dice 1 calculator. Maybe extract this into a function that takes a die parameter, and then calculates the value
 
 		var diceDOM1 = document.querySelector('#dice1');
 		var diceDOM2 = document.querySelector('#dice2');
-		// diceDOM.style.display = 'block';
-		diceDOM1.src = 'dice-' + dice1 + '.png';
-		diceDOM2.src = 'dice-' + dice2 + '.png';
+	// 	// diceDOM.style.display = 'block';
+		// diceDOM1.src = 'dice-' + dice1 + '.png';
+		// diceDOM2.src = 'dice-' + dice2 + '.png';
 
-		if(dice1 !== 0 || dice2 !== 0) {
-			// roundScore += rollScore;
-			document.querySelector('#current-' + activePlayer).textContent = roundScore;
-		} else {
-			nextPlayer();
-		}
+		diceDOM1.src = 'dice-' + (dice1) + '.png';
+		diceDOM2.src = 'dice-' + (dice2) + '.png';
+
+
+	// 	if(dice1 !== 0 || dice2 !== 0) {
+	// 		// roundScore += rollScore;
+	// 		document.querySelector('#current-' + activePlayer).textContent = roundScore;
+	// 	} else {
+	// 		// alert('Pig out!')
+	// 		nextPlayer();
+		// }
 	}
 });
-
-document.querySelector('.btn-hold').addEventListener('click', function() {
-	if(gamePlaying) {	
-		scores[activePlayer] += roundScore;
-
-		document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
-
-		if(scores[activePlayer] >= 100) {
-			alert('Player ' + (activePlayer + 1) + ' wins!!!!')
-			document.getElementById('name-' + activePlayer).textContent = 'Winner!!!';
-			// document.querySelector('.dice').style.display = 'none';
-			document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-			document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-			gamePlaying = false;
-		} else {
-			nextPlayer();	
-		}
-	}
-})
-
-function nextPlayer() {
-	activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-	roundScore = 0;
-
-	document.getElementById('current-0').textContent = '0';
-	document.getElementById('current-1').textContent = '0';
-
-	document.querySelector('.player-0-panel').classList.toggle('active');
-	document.querySelector('.player-1-panel').classList.toggle('active');
-
-	// document.querySelector('.dice').style.display = 'none';
-}
 
 document.querySelector('.btn-new').addEventListener('click', init);
